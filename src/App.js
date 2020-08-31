@@ -1,12 +1,18 @@
 import React from 'react';
 import './App.css';
 
+// react-router-dom
 import { Switch, Route } from "react-router-dom";
+
+// Components
+import Landing from './pages/landing/landing.component';
 
 function App() {
   return (
     <div>
-      Let's start
+      <Switch>
+        <Route exact path="/" component={Landing}/>
+      </Switch>
     </div>
   );
 }
