@@ -1,6 +1,9 @@
 import React from 'react';
 import './login.styles.css';
 
+// axios
+import axios from 'axios';
+
 // Components
 import FormInput from '../form-input/form-input.component';
 
@@ -17,6 +20,29 @@ class Login extends React.Component{
 
 	handleSubmit = event => {
 		event.preventDefault();
+		const	{ username, password } = this.state;
+
+		const data = JSON.stringify({
+			"username": username,
+			"password": password,
+		});
+
+		const config = {
+			method: 'post',
+			url: 'https://java.bocetos.co/userred-0.0.1-SNAPSHOT/auth',
+			headers: { 
+				"content-type": "application/json",
+			},
+			data : data
+		};
+
+		axios(config)
+		.then(response => {
+			alert(JSON.stringify(response.data));
+		})
+		.catch(error => {
+			alert(error);
+		});
 	};
 	
 	handleChange = event => {
