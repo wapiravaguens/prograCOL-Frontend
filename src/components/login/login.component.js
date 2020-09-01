@@ -40,7 +40,7 @@ class Login extends React.Component{
 		axios(config)
 		.then(response => {
 			localStorage.setItem("token", response.data.Authorization);
-			window.location.href = "/dashboard";
+			window.location.href = "/dashboard/perfil";
 		})
 		.catch(error => {
 			this.setState({error: true});

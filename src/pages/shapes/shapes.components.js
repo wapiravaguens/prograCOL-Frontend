@@ -59,6 +59,11 @@ class Shapes extends React.Component {
 		this.receivedData();
 	}
 
+	add = event => {
+		event.preventDefault();
+		window.location.href = "/dashboard/shapes/new";
+	}
+
 	render() {
 		if (this.state.loading) {
 			return(
@@ -68,6 +73,7 @@ class Shapes extends React.Component {
 			const { content, pageCount } = this.state;
 			return (
 				<div>
+					<button onClick={this.add} className='btn btn-primary btn-shape'>Nueva +</button>
 					<div className='shape-container'>
 						<div className='shape'>
 							{
@@ -76,7 +82,7 @@ class Shapes extends React.Component {
 								)
 							}
 						</div>
-				</div>
+					</div>
 					<div className='pagination-container'>
 						<ReactPaginate
 							previousLabel={"prev"}

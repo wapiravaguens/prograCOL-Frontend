@@ -1,6 +1,11 @@
+.btn-shape {
+  margin: 15px 0px 0px 5px;
+}
+
 .shape-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 10px 0px;
 }
 
