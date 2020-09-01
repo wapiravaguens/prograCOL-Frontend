@@ -1,6 +1,23 @@
+.shape-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
+.shape {
+	display: flex;
+	flex-direction: row;  /* <--- Really freaking cool! */
+	flex-wrap: wrap;
+	justify-content: space-around;
+  align-items: center;      /* Add this */	
+  width: 950px;
+}
+
+
 .pagination-container {
   display: flex;
   justify-content: center;
+  margin: 15px 0px;
 }
 
 .pagination {
@@ -10,23 +27,23 @@
   outline: none;
 }
 .pagination > .active > a{
-  background-color: #47ccde ;
-  border-color: #47ccde ;
+  background-color: #007bff ;
+  border-color: #007bff ;
   color: #fff;
 }
 .pagination > li > a{
-  border: 1px solid #47ccde ;
-  padding: 5px 10px;
+  border: 1px solid #007bff ;
+  padding: 10px 10px;
   outline: none;
   cursor: pointer;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-  background-color: #47ccde ;
-  border-color: #47ccde;
+  background-color: #007bff ;
+  border-color: #007bff;
   outline: none ;
 }
 .pagination > li > a, .pagination > li > span{
-  color: #47ccde
+  color: #007bff
 }
 .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
   border-radius: unset

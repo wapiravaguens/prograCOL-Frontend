@@ -7,13 +7,16 @@ import axios from 'axios';
 // Pagination
 import ReactPaginate from 'react-paginate';
 
+// Components
+import ShapeItem from '../../components/shape-item/shape-item.component';
+
 class Shapes extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			content: [],
-			perPage: 10,
+			perPage: 9,
 			currentPage: 0,
 			pageCount: undefined,
 			loading: true,
@@ -65,11 +68,15 @@ class Shapes extends React.Component {
 			const { content, pageCount } = this.state;
 			return (
 				<div>
-					<div>
-						{content.map(element => 
-							<div key={element.id}>{element.name}</div>)
-						}
-					</div>
+					<div className='shape-container'>
+						<div className='shape'>
+							{
+								content.map(element => 
+									<ShapeItem key={element.id} item={element} />
+								)
+							}
+						</div>
+				</div>
 					<div className='pagination-container'>
 						<ReactPaginate
 							previousLabel={"prev"}
