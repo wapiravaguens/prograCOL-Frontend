@@ -13,7 +13,8 @@ class Login extends React.Component{
 
 		this.state = {
 			username: "",
-			password: ""
+			password: "",
+			error: false,
 		}
 
 	}
@@ -38,11 +39,11 @@ class Login extends React.Component{
 
 		axios(config)
 		.then(response => {
-			alert(JSON.stringify(response.data));
 			localStorage.setItem("token", response.data.Authorization);
+			window.location.href = "/dashboard";
 		})
 		.catch(error => {
-			alert("Incorrect username or password");
+			this.setState({error: true});
 		});
 	};
 	
@@ -52,29 +53,32 @@ class Login extends React.Component{
 	}
 
 	render() {
-		const	{ username, password } = this.state;
+		const	{ username, password, error} = this.state;
 		return (
-			<div>
-				<div>Login</div>
-				<form onSubmit={this.handleSubmit}>
-					<FormInput 
-						name='username'  
-						type='text' 
-						value={username} 
-						onChange={this.handleChange}
-						label='username'
-						required 
-					/>
-					<FormInput 
-						name='password'  
-						type='password' 
-						value={password} 
-						onChange={this.handleChange}
-						label='password'
-						required 
-					/>
-					<button type='submit'>Login</button>
-				</form>
+			<div className="login">
+				<div className='login__container'>
+					<div className="login__title">Login</div>
+					{ error ? <div className="alert alert-warning" role="alert">Incorrect username or password.</div> : null }
+					<form onSubmit={this.handleSubmit}>
+						<FormInput 
+							name='username'  
+							type='text' 
+							value={username} 
+							onChange={this.handleChange}
+							label='Username'
+							required 
+						/>
+						<FormInput 
+							name='password'  
+							type='password' 
+							value={password} 
+							onChange={this.handleChange}
+							label='Password'
+							required 
+						/>
+						<button type='submit' className='btn btn-primary btn-lg btn-block'>Login</button>
+					</form>
+				</div>		
 			</div>
 		);
 	}
