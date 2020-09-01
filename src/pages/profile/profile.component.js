@@ -4,6 +4,9 @@ import './profile.styles.css';
 // axios
 import axios from 'axios';
 
+// Components
+import ProfileField from '../../components/profile-field/profile-field.component';
+
 class Profile extends React.Component {
 	constructor(props) {
 		super(props);
@@ -26,7 +29,6 @@ class Profile extends React.Component {
 		
 		axios(config)
 		.then(response => {
-			// alert(JSON.stringify(response.data));
 			this.setState({ userData: response.data.data, loading: false});
 		})
 		.catch(function (error) {
@@ -40,15 +42,26 @@ class Profile extends React.Component {
 				<div>...Loading</div>
 			);
 		} else {
-			const { names, lastNames, username, rolDTO, createdAt} = this.state.userData;
-			alert(JSON.stringify(this.state.userData));
+			const { names, lastNames, username, rolDTO, createdAt } = this.state.userData;
 			return(
-				<div>
-					<div>{names}</div>
-					<div>{lastNames}</div>
-					<div>{username}</div>
-					<div>{rolDTO.name}</div>
-					<div>{createdAt}</div>
+				<div className='container-fluid'>
+					<div className='profile__box'>
+						<div className='profile__image'>
+							<img src={require(`../../assets/images/user.jpg`)} alt='user' width="300px" />
+						</div>
+						<div className='profile__data'>
+								<ProfileField name='Nombre' value={names}/>
+								<ProfileField name='Apellidos' value={lastNames}/>
+								<ProfileField name='Nombre de usuario' value={username}/>
+								<ProfileField name='Rol' value={rolDTO.name}/>
+								<ProfileField name='Fecha de creación' value={new Intl.DateTimeFormat("es-MX", {
+									year: "numeric",
+									month: "long",
+									day: "2-digit"
+								}).format(new Date(createdAt))} 
+								/>
+						</div>
+					</div>
 				</div>
 			);
 		}

@@ -1,0 +1,11 @@
+.profile-field {
+	margin-bottom: 10px;
+}
+
+.profile-field__name {
+	font-weight: 400;
+}
+
+.profile-field__value {
+	font-weight: 700;
+}

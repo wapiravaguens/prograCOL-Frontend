@@ -4,7 +4,7 @@ import './shapes.styles.css';
 const Shapes = () => {
 	return (
 		<div>
-			Shapes
+			Shape
 		</div>
 	);
 }
