@@ -46,9 +46,9 @@ class Dashboard extends React.Component {
 				</div>
 
 				<div id='page-content-wrapper'>
-					<nav class='navbar navbar-light bg-light'>
-						<button onClick={this.toggle} class='navbar-toggler' type='button' data-toggle='collapse'>
-							<span class='navbar-toggler-icon'></span>
+					<nav className='navbar navbar-light bg-light'>
+						<button onClick={this.toggle} className='navbar-toggler' type='button' data-toggle='collapse'>
+							<span className='navbar-toggler-icon'></span>
 						</button>
 						<button onClick={this.logout} className='btn btn-primary'>Salir</button>
 					</nav>
