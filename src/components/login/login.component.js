@@ -39,9 +39,10 @@ class Login extends React.Component{
 		axios(config)
 		.then(response => {
 			alert(JSON.stringify(response.data));
+			localStorage.setItem("token", response.data.Authorization);
 		})
 		.catch(error => {
-			alert(error);
+			alert("Incorrect username or password");
 		});
 	};
 	
@@ -54,6 +55,7 @@ class Login extends React.Component{
 		const	{ username, password } = this.state;
 		return (
 			<div>
+				<div>Login</div>
 				<form onSubmit={this.handleSubmit}>
 					<FormInput 
 						name='username'  
