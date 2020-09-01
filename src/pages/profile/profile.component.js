@@ -44,7 +44,7 @@ class Profile extends React.Component {
 		} else {
 			const { names, lastNames, username, rolDTO, createdAt } = this.state.userData;
 			return(
-				<div className='container-fluid'>
+				<div className='profile'>
 					<div className='profile__box'>
 						<div className='profile__image'>
 							<img src={require(`../../assets/images/user.jpg`)} alt='user' width="300px" />

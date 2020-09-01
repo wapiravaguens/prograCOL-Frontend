@@ -8,6 +8,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import Profile from '../profile/profile.component';
 import Shapes from '../shapes/shapes.components';
 import ShapeNew from '../../components/shape-new/shape-new.component';
+import Groups from '../groups/groups.components';
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -57,7 +58,7 @@ class Dashboard extends React.Component {
 						<Switch>
 							<Route exact path={`${match.path}/profile`} component={Profile} />
 							<Route exact path={`${match.path}/shapes`} component={Shapes} />
-							<Route exact path={`${match.path}/groups`} component={Profile} />
+							<Route exact path={`${match.path}/groups`} component={Groups} />
 							<Route exact path={`${match.path}/shapes/new`} component={ShapeNew} />
 						</Switch>
 					</div>
