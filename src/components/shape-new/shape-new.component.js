@@ -8,6 +8,9 @@ import axios from 'axios';
 import FormInput from '../form-input/form-input.component';
 import Spinner from '../spinner/spinner.component';
 
+// Alerts
+import Swal from 'sweetalert2'
+
 class ShapeNew extends React.Component {
 	constructor(props) {
 		super(props);
@@ -22,7 +25,6 @@ class ShapeNew extends React.Component {
 	}
 
 	handleClick = i => {
-		console.log(i);
 		const newpositionsWinner  = this.state.positionsWinner;
 		newpositionsWinner[i] = !newpositionsWinner[i];
 		this.setState({ positionsWinner: newpositionsWinner });
@@ -57,8 +59,15 @@ class ShapeNew extends React.Component {
 			});
 		})
 		.catch(function (error) {
-			alert("Error de Autenticación");
-			window.location.href = "/";
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Error de autenticación',
+			}).then((result) => {
+				if (result.value) {
+					window.location.href = "/";
+				}
+			})
 		});
 	}
 
@@ -71,7 +80,6 @@ class ShapeNew extends React.Component {
 			"idFigureGroup": idFigureGroup,
 			"positions": positionsWinner
 		});
-		console.log(data);
 
 		const config = {
 			method: 'post',
@@ -85,12 +93,25 @@ class ShapeNew extends React.Component {
 
 		axios(config)
 		.then(response => {
-			alert('Success');
-			window.location.href = "/dashboard/shapes";
+			Swal.fire({
+				icon: 'success',
+				text: 'Figura creada exitosamete',
+			}).then((result) => {
+				if (result.value) {
+					window.location.href = "/dashboard/shapes";
+				}
+			})
 		})
 		.catch(error => {
-			alert("Error de Autenticación");
-			window.location.href = "/";
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Error de autenticación',
+			}).then((result) => {
+				if (result.value) {
+					window.location.href = "/";
+				}
+			})
 		});
 	}
 
@@ -105,7 +126,6 @@ class ShapeNew extends React.Component {
 			);
 		} else {
 			const { positionsWinner, figureName, groupFigures } = this.state;
-			console.log(groupFigures);
 			return (
 				<div >
 						<form className="shape-new" onSubmit={this.handleSubmit}>

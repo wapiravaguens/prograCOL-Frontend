@@ -21,7 +21,7 @@ class Login extends React.Component{
 
 	handleSubmit = event => {
 		event.preventDefault();
-		const	{ username, password, sending } = this.state;
+		const	{ username, password } = this.state;
 
 		const data = JSON.stringify({
 			"username": username,
@@ -37,19 +37,15 @@ class Login extends React.Component{
 			data : data
 		};
 
-		this.setState({sending : true });
 
-		if (!sending) {
-			axios(config)
-			.then(response => {
-				localStorage.setItem("token", response.data.Authorization);
-				window.location.href = "/dashboard";
-			})
-			.catch(error => {
-				this.setState({error: true});
-			});
-			
-		}
+		axios(config)
+		.then(response => {
+			localStorage.setItem("token", response.data.Authorization);
+			window.location.href = "/dashboard";
+		})
+		.catch(error => {
+			this.setState({error: true});
+		});
 
 	};
 	

@@ -8,6 +8,9 @@ import axios from 'axios';
 import ProfileField from '../../components/profile-field/profile-field.component';
 import Spinner from '../../components/spinner/spinner.component';
 
+// Alerts
+import Swal from 'sweetalert2'
+
 class Profile extends React.Component {
 	constructor(props) {
 		super(props);
@@ -33,8 +36,15 @@ class Profile extends React.Component {
 			this.setState({ userData: response.data.data, loading: false});
 		})
 		.catch(function (error) {
-			alert("Error de Autenticación");
-			window.location.href = "/";
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Error de autenticación',
+			}).then((result) => {
+				if (result.value) {
+					window.location.href = "/";
+				}
+			})
 		});
 	}
 

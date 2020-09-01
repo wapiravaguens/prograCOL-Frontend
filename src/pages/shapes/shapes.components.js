@@ -11,6 +11,9 @@ import ReactPaginate from 'react-paginate';
 import ShapeItem from '../../components/shape-item/shape-item.component';
 import Spinner from '../../components/spinner/spinner.component';
 
+// Alerts
+import Swal from 'sweetalert2'
+
 class Shapes extends React.Component {
 	constructor(props) {
 		super(props);
@@ -37,7 +40,6 @@ class Shapes extends React.Component {
 		
 		axios(config)
 		.then(response => {
-			console.log(response.data)
 			this.setState({ 
 				pageCount : response.data.data.totalPages,
 				content : response.data.data.content,
@@ -45,8 +47,15 @@ class Shapes extends React.Component {
 			});
 		})
 		.catch(function (error) {
-			alert("Error de Autenticación");
-			window.location.href = "/";
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Error de autenticación',
+			}).then((result) => {
+				if (result.value) {
+					window.location.href = "/";
+				}
+			})
 		});
 	}
 

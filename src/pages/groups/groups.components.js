@@ -8,6 +8,9 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import Spinner from '../../components/spinner/spinner.component';
 
+// Alerts
+import Swal from 'sweetalert2'
+
 class Groups extends React.Component {
 	constructor(props) {
 		super(props);
@@ -34,7 +37,6 @@ class Groups extends React.Component {
 		
 		axios(config)
 		.then(response => {
-			// console.log(response.data)
 			this.setState({ 
 				pageCount : response.data.data.totalPages,
 				content : response.data.data.content,
@@ -42,8 +44,15 @@ class Groups extends React.Component {
 			});
 		})
 		.catch(function (error) {
-			alert("Error de Autenticación");
-			window.location.href = "/";
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Error de autenticación',
+			}).then((result) => {
+				if (result.value) {
+					window.location.href = "/";
+				}
+			})
 		});
 	}
 
@@ -79,8 +88,6 @@ class Groups extends React.Component {
 							<tbody>
 								{
 									content.map(element => {
-										console.log("Hey");
-										console.log(element);
 										return (
 											<tr key={element.id}>
 												<th scope="row">{element.name}</th>
