@@ -6,6 +6,7 @@ import axios from 'axios';
 
 // Components
 import FormInput from '../form-input/form-input.component';
+import Spinner from '../spinner/spinner.component';
 
 class ShapeNew extends React.Component {
 	constructor(props) {
@@ -16,7 +17,7 @@ class ShapeNew extends React.Component {
 			idFigureGroup: 0,
 			groupFigures: [],
 			positionsWinner: Array(25).fill(false),
-			loading: true
+			loading: true,
 		}
 	}
 
@@ -50,14 +51,14 @@ class ShapeNew extends React.Component {
 		
 		axios(config)
 		.then(response => {
-			console.log(response.data)
 			this.setState({ 
 				groupFigures : response.data.data,
 				loading: false
 			});
 		})
 		.catch(function (error) {
-			alert(error);
+			alert("Error de Autenticación");
+			window.location.href = "/";
 		});
 	}
 
@@ -85,11 +86,11 @@ class ShapeNew extends React.Component {
 		axios(config)
 		.then(response => {
 			alert('Success');
-			console.log(response.data)
+			window.location.href = "/dashboard/shapes";
 		})
 		.catch(error => {
-			alert(error);
-			// this.setState({error: true});
+			alert("Error de Autenticación");
+			window.location.href = "/";
 		});
 	}
 
@@ -99,7 +100,9 @@ class ShapeNew extends React.Component {
 
 	render() {
 		if (this.state.loading) {
-			return (<div>...Loading</div>);
+			return (
+				<Spinner />
+			);
 		} else {
 			const { positionsWinner, figureName, groupFigures } = this.state;
 			console.log(groupFigures);

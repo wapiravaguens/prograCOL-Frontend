@@ -9,6 +9,7 @@ import ReactPaginate from 'react-paginate';
 
 // Components
 import ShapeItem from '../../components/shape-item/shape-item.component';
+import Spinner from '../../components/spinner/spinner.component';
 
 class Shapes extends React.Component {
 	constructor(props) {
@@ -44,7 +45,8 @@ class Shapes extends React.Component {
 			});
 		})
 		.catch(function (error) {
-			alert(error);
+			alert("Error de Autenticación");
+			window.location.href = "/";
 		});
 	}
 
@@ -67,7 +69,7 @@ class Shapes extends React.Component {
 	render() {
 		if (this.state.loading) {
 			return(
-				<div>...Loading</div>
+				<Spinner />
 			);
 		} else {
 			const { content, pageCount } = this.state;

@@ -9,7 +9,6 @@ const FormInput = ({ handleChange, label, ...otherProps }) => {
 			</label>
 			<input 
 				className='form-control'
-				onChange={handleChange}
 				id={label}
 				{...otherProps}	
 			/>

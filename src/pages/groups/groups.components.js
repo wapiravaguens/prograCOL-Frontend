@@ -6,6 +6,7 @@ import axios from 'axios';
 
 // Pagination
 import ReactPaginate from 'react-paginate';
+import Spinner from '../../components/spinner/spinner.component';
 
 class Groups extends React.Component {
 	constructor(props) {
@@ -41,7 +42,8 @@ class Groups extends React.Component {
 			});
 		})
 		.catch(function (error) {
-			alert(error);
+			alert("Error de Autenticación");
+			window.location.href = "/";
 		});
 	}
 
@@ -59,7 +61,7 @@ class Groups extends React.Component {
 	render() {
 		if (this.state.loading) {
 			return(
-				<div>...Loading</div>
+				<Spinner />
 			);
 		} else {
 			const { content, pageCount } = this.state;

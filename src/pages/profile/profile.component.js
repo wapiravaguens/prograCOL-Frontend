@@ -6,6 +6,7 @@ import axios from 'axios';
 
 // Components
 import ProfileField from '../../components/profile-field/profile-field.component';
+import Spinner from '../../components/spinner/spinner.component';
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -32,14 +33,15 @@ class Profile extends React.Component {
 			this.setState({ userData: response.data.data, loading: false});
 		})
 		.catch(function (error) {
-			alert(error);
+			alert("Error de Autenticación");
+			window.location.href = "/";
 		});
 	}
 
 	render() {
 		if (this.state.loading) {
 			return(
-				<div>...Loading</div>
+				<Spinner />
 			);
 		} else {
 			const { names, lastNames, username, rolDTO, createdAt } = this.state.userData;
