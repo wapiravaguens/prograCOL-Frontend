@@ -27,7 +27,7 @@ class Login extends React.Component{
 		event.preventDefault();
 		const	{ username, password } = this.state;
 		try {
-			const response = await request('post', 'auth', JSON.stringify({ 'username': username, 'password': password }))
+			const response = await request('user', 'post', 'auth', JSON.stringify({ 'username': username, 'password': password }))
 			localStorage.setItem("token", response.data.Authorization);
 			window.location.href = "/dashboard";
 		} catch (error) {

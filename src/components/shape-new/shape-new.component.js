@@ -1,8 +1,8 @@
 import React from 'react';
 import './shape-new.styles.css';
 
-// axios
-import axios from 'axios';
+// Service
+import { authorizedRequest } from '../../service/API';
 
 // Components
 import FormInput from '../form-input/form-input.component';
@@ -24,95 +24,58 @@ class ShapeNew extends React.Component {
 		}
 	}
 
+	handleChange = event => {
+		const { value, name } = event.target;
+		this.setState({ [name] : value });
+	}
+
+	handleSelectChange = event => {
+    this.setState({ idFigureGroup: event.target.value })
+	}
+	
 	handleClick = i => {
 		const newpositionsWinner  = this.state.positionsWinner;
 		newpositionsWinner[i] = !newpositionsWinner[i];
 		this.setState({ positionsWinner: newpositionsWinner });
 	}
 
-	handleChange = event => {
-		const { value, name } = event.target;
-		this.setState({ [name] : value });
-	}
-
-	handleSelectChange = (event) => {
-    this.setState({
-      idFigureGroup: event.target.value
-    })
-  }
-
-	fetchGroupFigures() {
-		var config = {
-			method: 'get',
-			url: `https://java.bocetos.co/gamered-0.0.1-SNAPSHOT/groupfigure`,
-			headers: { 
-				'content-type': 'application/json',
-				'Authorization': localStorage.getItem('token'),
-			}
-		};
-		
-		axios(config)
-		.then(response => {
-			this.setState({ 
-				groupFigures : response.data.data,
-				loading: false
-			});
-		})
-		.catch(function (error) {
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Error de autenticación',
-			}).then((result) => {
-				if (result.value) {
-					window.location.href = "/";
-				}
-			})
-		});
-	}
-
-	handleSubmit = event => {
+	handleSubmit = async event => {
 		event.preventDefault();
 		const	{ figureName, idFigureGroup, positionsWinner } = this.state;
-
 		const data = JSON.stringify({
 			"figureName": figureName,
 			"idFigureGroup": idFigureGroup,
 			"positions": positionsWinner
 		});
 
-		const config = {
-			method: 'post',
-			url: 'https://java.bocetos.co/gamered-0.0.1-SNAPSHOT/figure',
-			headers: { 
-				"content-type": "application/json",
-				'Authorization': localStorage.getItem('token'),
-			},
-			data : data
-		};
+		try {
+			await authorizedRequest('game', 'post', `figure`, data);
+			Swal.fire({ icon: 'success', text: 'Figura creada exitosamete' })
+			.then(result => { 
+				if (result.value) window.location.href = "/dashboard/shapes"
+			})
+		} catch (error) {
+			Swal.fire({ icon: 'error', title: 'Oops...', text: 'Error de autenticación'})
+			.then(result => { 
+				if (result.value) window.location.href = "/";
+			});
+		}
 
-		axios(config)
-		.then(response => {
-			Swal.fire({
-				icon: 'success',
-				text: 'Figura creada exitosamete',
-			}).then((result) => {
-				if (result.value) {
-					window.location.href = "/dashboard/shapes";
-				}
-			})
-		})
-		.catch(error => {
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Error de autenticación',
-			}).then((result) => {
-				if (result.value) {
-					window.location.href = "/";
-				}
-			})
-		});
+	}
+
+	async fetchGroupFigures() {
+		try {
+			const response = await authorizedRequest('game', 'get', `groupfigure`);
+			this.setState({ 
+				groupFigures : response.data.data,
+				loading: false
+			});
+		} catch (error) {
+			Swal.fire({ icon: 'error', title: 'Oops...', text: 'Error de autenticación'})
+			.then(result => { 
+				if (result.value) window.location.href = "/";
+			});
+		}
 	}
 
 	componentDidMount() {

@@ -1,8 +1,8 @@
 import React from 'react';
 import './shapes.styles.css';
 
-// axios
-import axios from 'axios';
+// Service
+import { authorizedRequest } from '../../service/API';
 
 // Pagination
 import ReactPaginate from 'react-paginate';
@@ -27,64 +27,49 @@ class Shapes extends React.Component {
 		};
 	}
 	
-	receivedData() {
+	async receivedData() {
 		const { perPage, currentPage } = this.state;
-		var config = {
-			method: 'get',
-			url: `https://java.bocetos.co/gamered-0.0.1-SNAPSHOT/figure/paged?size=${perPage}&page=${currentPage}`,
-			headers: { 
-				'content-type': 'application/json',
-				'Authorization': localStorage.getItem('token'),
-			}
-		};
-		
-		axios(config)
-		.then(response => {
+		try {
+			const response = await authorizedRequest('game', 'get', `figure/paged?size=${perPage}&page=${currentPage}`);
 			this.setState({ 
 				pageCount : response.data.data.totalPages,
 				content : response.data.data.content,
 				loading : false
 			});
-		})
-		.catch(function (error) {
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Error de autenticación',
-			}).then((result) => {
-				if (result.value) {
-					window.location.href = "/";
-				}
+		} catch (error) {
+			Swal.fire({ icon: 'error', title: 'Oops...', text: 'Error de autenticación'})
+			.then(result => { 
+				if (result.value) window.location.href = "/";
 			})
-		});
+		}
 	}
 
-	handlePageClick = (e) => {
-		const selectedPage = e.selected;
-		this.setState({ currentPage: selectedPage }, () => {
+	handlePageClick = e => {
+		this.setState({ currentPage: e.selected }, () => {
 			this.receivedData()
 		});
 	};
+
+	handleAddShape = event => {
+		event.preventDefault();
+		window.location.href = "/dashboard/shapes/new";
+	}
 
 	componentDidMount() {
 		this.receivedData();
 	}
 
-	add = event => {
-		event.preventDefault();
-		window.location.href = "/dashboard/shapes/new";
-	}
-
 	render() {
 		if (this.state.loading) {
-			return(
-				<Spinner />
-			);
+			return <Spinner />
 		} else {
 			const { content, pageCount } = this.state;
 			return (
 				<div>
-					<button onClick={this.add} className='btn btn-primary btn-shape'>Nueva +</button>
+					
+					<button onClick={this.handleAddShape} className='btn btn-primary btn-shape'>Nueva +</button>
+					<h2 className="shape-title">Figuras</h2>
+					
 					<div className='shape-container'>
 						<div className='shape'>
 							{
@@ -94,6 +79,7 @@ class Shapes extends React.Component {
 							}
 						</div>
 					</div>
+
 					<div className='pagination-container'>
 						<ReactPaginate
 							previousLabel={"<"}
@@ -109,6 +95,7 @@ class Shapes extends React.Component {
 							activeClassName={"active"}
 						/>
 					</div>
+
 				</div>
 			);
 		}

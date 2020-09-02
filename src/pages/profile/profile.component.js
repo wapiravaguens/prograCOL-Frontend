@@ -23,10 +23,10 @@ class Profile extends React.Component {
 
 	async componentDidMount() {
 		try {
-			const response = await authorizedRequest('get', 'myprofile');
+			const response = await authorizedRequest('user', 'get', 'myprofile');
 			this.setState({ userData: response.data.data, loading: false });
 		} catch (error) {
-			Swal.fire({ icon: 'error', title: 'Oops...', text: 'Error de autenticación',})
+			Swal.fire({ icon: 'error', title: 'Oops...', text: 'Error de autenticación'})
 			.then(result => { 
 				if (result.value) window.location.href = "/";
 			})
