@@ -121,49 +121,52 @@ class ShapeNew extends React.Component {
 
 	render() {
 		if (this.state.loading) {
-			return (
-				<Spinner />
-			);
+			return <Spinner />
 		} else {
 			const { positionsWinner, figureName, groupFigures } = this.state;
 			return (
-				<div >
-						<form className="shape-new" onSubmit={this.handleSubmit}>
-							<div className="shape-new__input">
-								<label htmlFor="inputState">Grupo</label>
-								<select onChange={this.handleSelectChange} required id="inputState" className="form-control">
-									<option value="">Elegir Grupo</option>
-									{groupFigures.map((ele, i) => <option key={ele.id} value={ele.id}>{ele.name}</option>)}
-								</select>
-							</div>
-							<div className="shape-new__input">
-								<FormInput 
-									name='figureName'  
-									type='text' 
-									value={figureName} 
-									onChange={this.handleChange}
-									label='Nombre figura'
-									required 
-								/>
-							</div>
-							<div className='shape-item'>
-								<div className='shape-item__name'>{figureName}</div>
-								<div className='shape-item__grid'>
-									<div className='shape-item__grid-container'>
-										{
-											positionsWinner.map((pos, i) => {
-												if (pos) {
-													return (<div key={i} onClick={() => this.handleClick(i)} className="shape-item__value active"></div>);
-												} else {
-													return (<div key={i} onClick={() => this.handleClick(i)} className="shape-item__value"></div>);
-												}
-											})
-										}
-									</div>
+				<div className='shape-new'>
+					<form className="shape-new__form" onSubmit={this.handleSubmit}>
+
+						<div className="shape-new__input">
+							<label htmlFor="inputState">Grupo</label>
+							<select onChange={this.handleSelectChange} required id="inputState" className="form-control">
+								<option value="">Elegir Grupo</option>
+								{groupFigures.map((ele, i) => <option key={ele.id} value={ele.id}>{ele.name}</option>)}
+							</select>
+						</div>
+
+						<div className="shape-new__input">
+							<FormInput 
+								name='figureName'  
+								type='text' 
+								value={figureName} 
+								onChange={this.handleChange}
+								label='Nombre figura'
+								required 
+							/>
+						</div>
+
+						<div className='shape-item'>
+							<div className='shape-item__name'>{figureName}</div>
+							<div className='shape-item__grid'>
+								<div className='shape-item__grid-container'>
+									{
+										positionsWinner.map((pos, i) => {
+											if (pos) {
+												return (<div key={i} onClick={() => this.handleClick(i)} className="shape-item__value active"></div>);
+											} else {
+												return (<div key={i} onClick={() => this.handleClick(i)} className="shape-item__value"></div>);
+											}
+										})
+									}
 								</div>
 							</div>
-							<button type='submit' className='btn btn-primary btn-lg btn-block'>Crear</button>
-						</form>
+						</div>
+
+						<button type='submit' className='btn btn-primary btn-lg btn-block'>Crear</button>
+						
+					</form>
 				</div>
 			);
 		}

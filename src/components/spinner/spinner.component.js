@@ -3,7 +3,9 @@ import './spinner.styles.css';
 
 const Spinner = () => {
 	return (
-		<div className="lds-facebook"><div></div><div></div><div></div></div>
+		<div className="row justify-content-md-center">
+			<div className="lds-facebook"><div></div><div></div><div></div></div>
+		</div>
 	);
 }
 
