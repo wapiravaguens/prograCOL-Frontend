@@ -12,10 +12,10 @@
 	padding: 2rem;
 	margin: 10px 0px;
 	display: flex;
-	flex-direction: row;  /* <--- Really freaking cool! */
+	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-around;
-  align-items: center;      /* Add this */	
+  align-items: center;
   max-width: 900px;
 }
 
@@ -24,6 +24,6 @@
 }
 
 .profile__data {
-	margin: 20px;
-	width: 270px;
+	margin: 2rem;
+	min-width: 270px;
 }

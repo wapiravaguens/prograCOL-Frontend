@@ -19,14 +19,12 @@ class Dashboard extends React.Component {
 		}
 	}
 
-	toggle = (event) => {
+	toggle = event => {
 		event.preventDefault();
-		this.setState((prevState) => ({
-			toggled: !prevState.toggled
-		}))
+		this.setState((prevState) => ({ toggled: !prevState.toggled }));
 	}
 
-	logout = (event) => {
+	logout = event => {
 		event.preventDefault();
 		localStorage.removeItem('token');
 		window.location.href = "/";
@@ -35,6 +33,7 @@ class Dashboard extends React.Component {
 	render() {
 		const { match } = this.props;
 		const { toggled } = this.state;
+
 		return (
 			<div className={`d-flex ${toggled ? 'toggled' : ''}`} id='wrapper'>
 
@@ -48,12 +47,14 @@ class Dashboard extends React.Component {
 				</div>
 
 				<div id='page-content-wrapper'>
+				
 					<nav className='navbar navbar-light bg-light'>
 						<button onClick={this.toggle} className='navbar-toggler' type='button' data-toggle='collapse'>
 							<span className='navbar-toggler-icon'></span>
 						</button>
 						<button onClick={this.logout} className='btn btn-primary'>Salir</button>
 					</nav>
+
 					<div className='container-fluid'>
 						<Switch>
 							<Route exact path={`${match.path}`} component={Profile} />
@@ -62,7 +63,9 @@ class Dashboard extends React.Component {
 							<Route exact path={`${match.path}/shapes/new`} component={ShapeNew} />
 						</Switch>
 					</div>
+					
 				</div>
+
 			</div>
 		);
 	}

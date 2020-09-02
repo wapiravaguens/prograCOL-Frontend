@@ -1,8 +1,8 @@
 import React from 'react';
 import './profile.styles.css';
 
-// axios
-import axios from 'axios';
+// Service
+import { authorizedRequest } from '../../service/API';
 
 // Components
 import ProfileField from '../../components/profile-field/profile-field.component';
@@ -21,57 +21,40 @@ class Profile extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-		var config = {
-			method: 'get',
-			url: 'https://java.bocetos.co/userred-0.0.1-SNAPSHOT/myprofile',
-			headers: { 
-				'content-type': 'application/json',
-				'Authorization': localStorage.getItem('token'),
-			}
-		};
-		
-		axios(config)
-		.then(response => {
-			this.setState({ userData: response.data.data, loading: false});
-		})
-		.catch(function (error) {
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Error de autenticación',
-			}).then((result) => {
-				if (result.value) {
-					window.location.href = "/";
-				}
+	async componentDidMount() {
+		try {
+			const response = await authorizedRequest('get', 'myprofile');
+			this.setState({ userData: response.data.data, loading: false });
+		} catch (error) {
+			Swal.fire({ icon: 'error', title: 'Oops...', text: 'Error de autenticación',})
+			.then(result => { 
+				if (result.value) window.location.href = "/";
 			})
-		});
+		}
 	}
 
 	render() {
 		if (this.state.loading) {
-			return(
-				<Spinner />
-			);
+			return <Spinner />
 		} else {
 			const { names, lastNames, username, rolDTO, createdAt } = this.state.userData;
-			return(
+			return (
 				<div className='profile'>
 					<div className='profile__box'>
 						<div className='profile__image'>
 							<img src={require(`../../assets/images/user.jpg`)} alt='user' width="270px" />
 						</div>
 						<div className='profile__data'>
-								<ProfileField name='Nombre' value={names}/>
-								<ProfileField name='Apellidos' value={lastNames}/>
-								<ProfileField name='Nombre de usuario' value={username}/>
-								<ProfileField name='Rol' value={rolDTO.name}/>
-								<ProfileField name='Fecha de creación' value={new Intl.DateTimeFormat("es-MX", {
-									year: "numeric",
-									month: "long",
-									day: "2-digit"
-								}).format(new Date(createdAt))} 
-								/>
+							<ProfileField name='Nombre' value={names}/>
+							<ProfileField name='Apellidos' value={lastNames}/>
+							<ProfileField name='Nombre de usuario' value={username}/>
+							<ProfileField name='Rol' value={rolDTO.name}/>
+							<ProfileField name='Fecha de creación' value={new Intl.DateTimeFormat("es-MX", {
+								year: "numeric",
+								month: "long",
+								day: "2-digit"
+							}).format(new Date(createdAt))} 
+							/>
 						</div>
 					</div>
 				</div>
