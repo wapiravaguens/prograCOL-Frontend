@@ -1,11 +1,11 @@
-.shape-new {
+.figure-new {
 	display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px 0px;
 }
 
-.shape-new__form {
+.figure-new__form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -18,7 +18,7 @@
 	margin: 10px 0px;
 }
 
-.shape-new__input {
+.figure-new__input {
 	width: 90%;
 	margin-bottom: 15px;
 }

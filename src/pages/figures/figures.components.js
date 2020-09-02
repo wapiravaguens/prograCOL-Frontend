@@ -1,5 +1,5 @@
 import React from 'react';
-import './shapes.styles.css';
+import './figures.styles.css';
 
 // Service
 import { authorizedRequest } from '../../service/API';
@@ -8,13 +8,13 @@ import { authorizedRequest } from '../../service/API';
 import ReactPaginate from 'react-paginate';
 
 // Components
-import ShapeItem from '../../components/shape-item/shape-item.component';
+import FigureItem from '../../components/figure-item/figure-item.component';
 import Spinner from '../../components/spinner/spinner.component';
 
 // Alerts
 import Swal from 'sweetalert2'
 
-class Shapes extends React.Component {
+class Figures extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -50,9 +50,9 @@ class Shapes extends React.Component {
 		});
 	};
 
-	handleAddShape = event => {
+	handleAddFigure = event => {
 		event.preventDefault();
-		window.location.href = "/dashboard/shapes/new";
+		window.location.href = "/dashboard/figures/new";
 	}
 
 	componentDidMount() {
@@ -67,14 +67,14 @@ class Shapes extends React.Component {
 			return (
 				<div>
 					
-					<button onClick={this.handleAddShape} className='btn btn-primary btn-shape'>Nueva +</button>
-					<h2 className="shape-title">Figuras</h2>
+					<button onClick={this.handleAddFigure} className='btn btn-primary btn-figure'>Nueva +</button>
+					<h2 className="figure-title">Figuras</h2>
 					
-					<div className='shape-container'>
-						<div className='shape'>
+					<div className='figure-container'>
+						<div className='figure'>
 							{
 								content.map(element => 
-									<ShapeItem key={element.id} item={element} />
+									<FigureItem key={element.id} item={element} />
 								)
 							}
 						</div>
@@ -102,4 +102,4 @@ class Shapes extends React.Component {
 	}
 }
 
-export default Shapes;
+export default Figures;

@@ -1,17 +1,18 @@
 import React from 'react';
-import './shape-new.styles.css';
+import './figure-new.styles.css';
 
 // Service
 import { authorizedRequest } from '../../service/API';
 
 // Components
 import FormInput from '../form-input/form-input.component';
+import FigureItem from '../figure-item/figure-item.component';
 import Spinner from '../spinner/spinner.component';
 
 // Alerts
 import Swal from 'sweetalert2'
 
-class ShapeNew extends React.Component {
+class FigureNew extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -52,7 +53,7 @@ class ShapeNew extends React.Component {
 			await authorizedRequest('game', 'post', `figure`, data);
 			Swal.fire({ icon: 'success', text: 'Figura creada exitosamete' })
 			.then(result => { 
-				if (result.value) window.location.href = "/dashboard/shapes"
+				if (result.value) window.location.href = "/dashboard/figures"
 			})
 		} catch (error) {
 			Swal.fire({ icon: 'error', title: 'Oops...', text: 'Error de autenticación'})
@@ -88,18 +89,18 @@ class ShapeNew extends React.Component {
 		} else {
 			const { positionsWinner, figureName, groupFigures } = this.state;
 			return (
-				<div className='shape-new'>
-					<form className="shape-new__form" onSubmit={this.handleSubmit}>
+				<div className='figure-new'>
+					<form className="figure-new__form" onSubmit={this.handleSubmit}>
 
-						<div className="shape-new__input">
+						<div className="figure-new__input">
 							<label htmlFor="inputState">Grupo</label>
 							<select onChange={this.handleSelectChange} required id="inputState" className="form-control">
 								<option value="">Elegir Grupo</option>
-								{groupFigures.map((ele, i) => <option key={ele.id} value={ele.id}>{ele.name}</option>)}
+								{groupFigures.map((group) => <option key={group.id} value={group.id}>{group.name}</option>)}
 							</select>
 						</div>
 
-						<div className="shape-new__input">
+						<div className="figure-new__input">
 							<FormInput 
 								name='figureName'  
 								type='text' 
@@ -110,22 +111,7 @@ class ShapeNew extends React.Component {
 							/>
 						</div>
 
-						<div className='shape-item'>
-							<div className='shape-item__name'>{figureName}</div>
-							<div className='shape-item__grid'>
-								<div className='shape-item__grid-container'>
-									{
-										positionsWinner.map((pos, i) => {
-											if (pos) {
-												return (<div key={i} onClick={() => this.handleClick(i)} className="shape-item__value active"></div>);
-											} else {
-												return (<div key={i} onClick={() => this.handleClick(i)} className="shape-item__value"></div>);
-											}
-										})
-									}
-								</div>
-							</div>
-						</div>
+						<FigureItem item={{name: figureName, positionsWinner: positionsWinner}} handleClick={this.handleClick} />
 
 						<button type='submit' className='btn btn-primary btn-lg btn-block'>Crear</button>
 						
@@ -136,4 +122,4 @@ class ShapeNew extends React.Component {
 	}
 }
 
-export default ShapeNew;
+export default FigureNew;

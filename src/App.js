@@ -10,12 +10,10 @@ import Dashboard from './pages/dashboard/dashboard.component';
 
 const App = () => {
   return (
-    <div>
-      <Switch>
-        <Route exact path='/' component={Landing}/>
-        <Route path='/dashboard' component={Dashboard} />;
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path='/' component={Landing}/>
+      <Route path='/dashboard' component={Dashboard} />;
+    </Switch>
   );
 }
 

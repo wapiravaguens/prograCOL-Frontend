@@ -6,8 +6,8 @@ import { Switch, Route, Link } from 'react-router-dom';
 
 // Components
 import Profile from '../profile/profile.component';
-import Shapes from '../shapes/shapes.components';
-import ShapeNew from '../../components/shape-new/shape-new.component';
+import Figures from '../figures/figures.components';
+import FigureNew from '../../components/figure-new/figure-new.component';
 import Groups from '../groups/groups.components';
 
 class Dashboard extends React.Component {
@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
 					<div className='sidebar-heading'>Bingo</div>
 					<div className='list-group list-group-flush'>
 						<Link to={`${match.url}`} className='list-group-item list-group-item-action bg-light'>Perfil</Link>
-						<Link to={`${match.url}/shapes`} className='list-group-item list-group-item-action bg-light'>Figuras</Link>
+						<Link to={`${match.url}/figures`} className='list-group-item list-group-item-action bg-light'>Figuras</Link>
 						<Link to={`${match.url}/groups`} className='list-group-item list-group-item-action bg-light'>Grupos</Link>
 					</div>
 				</div>
@@ -58,9 +58,9 @@ class Dashboard extends React.Component {
 					<div className='container-fluid'>
 						<Switch>
 							<Route exact path={`${match.path}`} component={Profile} />
-							<Route exact path={`${match.path}/shapes`} component={Shapes} />
+							<Route exact path={`${match.path}/figures`} component={Figures} />
 							<Route exact path={`${match.path}/groups`} component={Groups} />
-							<Route exact path={`${match.path}/shapes/new`} component={ShapeNew} />
+							<Route exact path={`${match.path}/figures/new`} component={FigureNew} />
 						</Switch>
 					</div>
 					

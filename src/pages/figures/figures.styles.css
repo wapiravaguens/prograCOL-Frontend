@@ -1,19 +1,19 @@
-.shape-title {
+.figure-title {
   text-align: center;
 }
 
-.btn-shape {
+.btn-figure {
   margin: 15px 0px 0px 5px;
 }
 
-.shape-container {
+.figure-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px 0px;
 }
 
-.shape {
+.figure {
 	display: flex;
 	flex-direction: row;  /* <--- Really freaking cool! */
 	flex-wrap: wrap;
