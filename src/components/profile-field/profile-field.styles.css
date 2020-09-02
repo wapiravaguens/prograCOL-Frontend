@@ -1,5 +1,7 @@
 .profile-field {
 	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
 }
 
 .profile-field__name {

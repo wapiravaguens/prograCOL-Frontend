@@ -45,11 +45,11 @@ class Profile extends React.Component {
 							<img src={require(`../../assets/images/user.jpg`)} alt='user' width="270px" />
 						</div>
 						<div className='profile__data'>
-							<ProfileField name='Nombre' value={names}/>
-							<ProfileField name='Apellidos' value={lastNames}/>
-							<ProfileField name='Nombre de usuario' value={username}/>
-							<ProfileField name='Rol' value={rolDTO.name}/>
-							<ProfileField name='Fecha de creación' value={new Intl.DateTimeFormat("es-MX", {
+							<ProfileField icon="person" name='Nombre' value={names}/>
+							<ProfileField icon="people" name='Apellidos' value={lastNames}/>
+							<ProfileField icon="code" name='Nombre de usuario' value={username}/>
+							<ProfileField icon="eye" name='Rol' value={rolDTO.name}/>
+							<ProfileField icon="calendar" name='Fecha de creación' value={new Intl.DateTimeFormat("es-MX", {
 								year: "numeric",
 								month: "long",
 								day: "2-digit"
