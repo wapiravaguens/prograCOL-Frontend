@@ -132,7 +132,7 @@ class ShapeNew extends React.Component {
 							<div className="shape-new__input">
 								<label htmlFor="inputState">Grupo</label>
 								<select onChange={this.handleSelectChange} required id="inputState" className="form-control">
-									<option value="">Selecciona Grupo</option>
+									<option value="">Elegir Grupo</option>
 									{groupFigures.map((ele, i) => <option key={ele.id} value={ele.id}>{ele.name}</option>)}
 								</select>
 							</div>
@@ -142,7 +142,7 @@ class ShapeNew extends React.Component {
 									type='text' 
 									value={figureName} 
 									onChange={this.handleChange}
-									label='Nombre'
+									label='Nombre figura'
 									required 
 								/>
 							</div>

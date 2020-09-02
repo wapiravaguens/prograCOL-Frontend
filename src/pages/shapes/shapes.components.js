@@ -96,8 +96,8 @@ class Shapes extends React.Component {
 					</div>
 					<div className='pagination-container'>
 						<ReactPaginate
-							previousLabel={"prev"}
-							nextLabel={"next"}
+							previousLabel={"<"}
+							nextLabel={">"}
 							breakLabel={"..."}
 							breakClassName={"break-me"}
 							pageCount={pageCount}

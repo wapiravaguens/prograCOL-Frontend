@@ -1,7 +1,7 @@
 import React from 'react';
 import './shape-item.styles.css';
 
-const ShapeItem = ({ item }, on) => {
+const ShapeItem = ({ item }) => {
 	return (
 		<div className='shape-item'>
 			<div className='shape-item__name'>{item.name}</div>

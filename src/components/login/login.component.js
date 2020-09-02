@@ -59,15 +59,15 @@ class Login extends React.Component{
 		return (
 			<div className="login">
 				<div className='login__container'>
-					<div className="login__title">Login</div>
-					{ error ? <div className="alert alert-warning" role="alert">Incorrect username or password.</div> : null }
+					<div className="login__title">Iniciar Sesión</div>
+					{ error ? <div className="alert alert-warning" role="alert">Usuario o Contraseña incorrecta.</div> : null }
 					<form onSubmit={this.handleSubmit}>
 						<FormInput 
 							name='username'  
 							type='text' 
 							value={username} 
 							onChange={this.handleChange}
-							label='Username'
+							label='Usuario'
 							required 
 						/>
 						<FormInput 
@@ -75,10 +75,10 @@ class Login extends React.Component{
 							type='password' 
 							value={password} 
 							onChange={this.handleChange}
-							label='Password'
+							label='Contraseña'
 							required 
 						/>
-						<button type='submit' className='btn btn-primary btn-lg btn-block'>Login</button>
+						<button type='submit' className='btn btn-primary btn-lg btn-block'>Iniciar Sesion</button>
 					</form>
 				</div>		
 			</div>
