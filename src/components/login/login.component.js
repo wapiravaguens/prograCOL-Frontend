@@ -1,64 +1,45 @@
 import React from 'react';
 import './login.styles.css';
 
-// axios
-import axios from 'axios';
-
 // Components
 import FormInput from '../form-input/form-input.component';
+
+// Service
+import { request } from '../../service/API';
 
 class Login extends React.Component{
 	constructor(props) {
 		super(props);
-
+		
 		this.state = {
 			username: "",
 			password: "",
 			error: false,
 		}
-
 	}
 
-	handleSubmit = event => {
-		event.preventDefault();
-		const	{ username, password } = this.state;
-
-		const data = JSON.stringify({
-			"username": username,
-			"password": password,
-		});
-
-		const config = {
-			method: 'post',
-			url: 'https://java.bocetos.co/userred-0.0.1-SNAPSHOT/auth',
-			headers: { 
-				"content-type": "application/json",
-			},
-			data : data
-		};
-
-
-		axios(config)
-		.then(response => {
-			localStorage.setItem("token", response.data.Authorization);
-			window.location.href = "/dashboard";
-		})
-		.catch(error => {
-			this.setState({error: true});
-		});
-
-	};
-	
 	handleChange = event => {
 		const { value, name } = event.target;
 		this.setState({ [name]: value });
 	}
 
+	handleSubmit = async event => {
+		event.preventDefault();
+		const	{ username, password } = this.state;
+		try {
+			const response = await request('post', 'auth', JSON.stringify({ 'username': username, 'password': password }))
+			localStorage.setItem("token", response.data.Authorization);
+			window.location.href = "/dashboard";
+		} catch (error) {
+			this.setState({ error: true });
+		}
+	};
+
+
 	render() {
 		const	{ username, password, error} = this.state;
 		return (
-			<div className="login">
-				<div className='login__container'>
+				<div className='login'>
 					<div className="login__title">Iniciar Sesión</div>
 					{ error ? <div className="alert alert-warning" role="alert">Usuario o Contraseña incorrecta.</div> : null }
 					<form onSubmit={this.handleSubmit}>
@@ -81,7 +62,6 @@ class Login extends React.Component{
 						<button type='submit' className='btn btn-primary btn-lg btn-block'>Iniciar Sesion</button>
 					</form>
 				</div>		
-			</div>
 		);
 	}
 }

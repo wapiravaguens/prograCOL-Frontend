@@ -6,7 +6,7 @@ import Login from '../../components/login/login.component';
 
 const Landing = () => {
 	return (
-		<div>
+		<div className="landing">
 			<Login />
 		</div>
 	);
