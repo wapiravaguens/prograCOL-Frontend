@@ -1,10 +1,8 @@
 .figure-item {
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	border-radius: 9px;
   border: 1px solid lightgray;
-  width: 300px;
-	height: 300px;
-	margin: 10px 0px;
+	padding: 10px 10px;
+	margin: 10px 10px;
 }
 
 .figure-item__grid {
@@ -17,14 +15,16 @@
 	flex-direction: row;  /* <--- Really freaking cool! */
 	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;      /* Add this */	
+	align-items: center;      /* Add this */
+	width: 250px;
+	height: 250px;
 }
 
 .figure-item__value {
 	border: 1px solid gray;
 	background-color: lightgray;
-  width: 50px;
-	height: 50px;
+  width: 20%;
+	height: 20%;
 	border-radius: 3px;
 }
 
