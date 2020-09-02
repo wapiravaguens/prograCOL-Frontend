@@ -2,7 +2,7 @@ import React from 'react';
 import './figures.styles.css';
 
 // Service
-import { authorizedRequest } from '../../service/API';
+import { authorizedRequest } from '../../service/API.service';
 
 // Pagination
 import ReactPaginate from 'react-paginate';

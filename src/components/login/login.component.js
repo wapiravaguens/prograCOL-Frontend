@@ -5,7 +5,7 @@ import './login.styles.css';
 import FormInput from '../form-input/form-input.component';
 
 // Service
-import { request } from '../../service/API';
+import { request } from '../../service/API.service';
 
 class Login extends React.Component{
 	constructor(props) {

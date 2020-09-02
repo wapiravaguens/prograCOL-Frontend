@@ -22,6 +22,7 @@
   background-color: #007bff ;
   border-color: #007bff;
   outline: none ;
+  color: #fff;
 }
 
 .pagination > li > a, .pagination > li > span{

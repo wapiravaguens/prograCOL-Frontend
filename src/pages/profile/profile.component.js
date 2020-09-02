@@ -2,7 +2,7 @@ import React from 'react';
 import './profile.styles.css';
 
 // Service
-import { authorizedRequest } from '../../service/API';
+import { authorizedRequest } from '../../service/API.service';
 
 // Components
 import ProfileField from '../../components/profile-field/profile-field.component';

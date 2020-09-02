@@ -2,7 +2,7 @@ import React from 'react';
 import './figure-new.styles.css';
 
 // Service
-import { authorizedRequest } from '../../service/API';
+import { authorizedRequest } from '../../service/API.service';
 
 // Components
 import FormInput from '../form-input/form-input.component';
