@@ -59,7 +59,7 @@ class Profile extends React.Component {
 				<div className='profile'>
 					<div className='profile__box'>
 						<div className='profile__image'>
-							<img src={require(`../../assets/images/user.jpg`)} alt='user' width="300px" />
+							<img src={require(`../../assets/images/user.jpg`)} alt='user' width="270px" />
 						</div>
 						<div className='profile__data'>
 								<ProfileField name='Nombre' value={names}/>
